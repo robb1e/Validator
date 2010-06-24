@@ -1,0 +1,19 @@
+<project name="validation">
+	<target name="clean">
+		<delete file="test.php"/>
+		<delete dir="target/reports"/>
+		<mkdir dir="target/reports"/>
+	</target>
+	<target name="validate" depends="clean">
+		
+		<copy file="test.template.php" tofile="test.php">
+			<filterset>
+				<filter token="SITE_URL" value="http://localhost"/>
+			</filterset>
+		</copy>
+		
+		<exec executable="phpunit" output="target/reports/validation.txt" failonerror="true">
+			<arg value="test.php"/>
+		</exec>
+	</target>
+</project>

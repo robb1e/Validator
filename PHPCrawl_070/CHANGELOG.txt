@@ -1,0 +1,93 @@
+Version 0.7
+2007/01/05 
+
+* New function setLinkPriority() added. Its possible now to set different
+priorities (priority-levels) for different links.
+
+* Found links are cached now in a different way so that the general
+performance was improved, especially when cralwing a lot of pages (big sites)
+in one process.
+
+* Added support for Secure Sockets Layer (SSL), so links like "https://.."
+will be followed corretly now.
+Please note that the PHP OpenSSL-extension is required for it to work.
+
+* The link-extraction and other parts were redone and should give better results
+now.
+
+* Methods setAggressiveLinkExtraction() and addLinkExtractionTag() added for
+setting up the link extraction manually.
+
+* Added support for robots.txt-files, method obeyRobotsTxt() added.
+
+* More information about found pages and files will be passed now to the method
+handlePageData(), especially information about all found links in the current
+page is available now. Method disableExtendedLinkInfo() added.
+
+* The crawler now is able to handle links like "http://www.foo.com:123" correctly
+and will send requests to the correct port. Method setPort() added.
+
+* The content of pages and files now can be received/streamed diretly to a temporary
+file instead of to memory, so now it shouldn't be a problem anymore to let the
+crawler receive big files.
+Methods setTmpFile(), addReceiveToTmpFileMatch() and addReceiveToMemoryMatch() added.
+
+* Added support for basic authentication. Now the crawler is able to crawl protected
+content. Method addBasicAuthentication() added.
+
+* Now its possible to abort the crawling-process by letting the overridable function
+handlePageData() return any negative value.
+
+* Method setUserAgentString() added for setting the user-agent-string in
+request-headers the crawler sends.
+
+* A html-testinterface for testing the different setups of the crawler is included in
+the package now.
+
+* The crawler doesn't do DNS-lookups anymore for every single page-request, only if the
+host is changing a lookup will be done once. This improves performance a little bit.
+
+* The crawler doesn't look for links anymore in every file it finds, only
+"text/html"-content will be checked for links.
+
+* Fixed problem with rebuilding links like "*foo".
+
+* Fixed problem with splitting/rebuilding URLs like
+"http://foo.bar.com/?http://foo/bar.html".
+
+* Fixed problem that the crawler handled i.e. "foo.com" and "www.foo.com" as different
+hosts.
+
+
+Version 0.65_pl2
+2005/08/22
+
+* Phpcrawl now doesn't throw any notices anymore when error-reporting
+  is set to E_ALL. Thanks to elitec0der!
+
+* Also there shouldn't be any notices anymore when "allow_call_time_pass_reference"
+  is set to OFF. Thanks philipx!
+  
+* Fixed a bug that appeared when running the crawler in followmode 3.
+  (The crawler never went "path up" anymore)
+  
+* Now the crawler sends the referer-header with requests correctly again.
+
+
+Version 0.65_pl1 (patchlevel 1)
+2004/08/06
+
+Just a few bugs were fixed in this version:
+(Yes, it took a time, sorry)
+
+* The crawler doesn't send empty "Cookie:" header anymore if there's no cookie to send.
+  (A few webserver rerturned a "bad request" header to this) Thanks Mark!
+
+* The crawler doesn't send one and the same cookie-header several times with a request
+  anymore if it was set more than one time by the server. (Didn't really matter though)
+
+* Crawler will find links in metatags used with single quotation marks (') like
+  <META HTTP-EQUIV='refresh' CONTENT='foo; URL=http://bar/'> now. Thanks Arsa!
+
+* HTTP 1.0 requests will be send now because of problems with HTTP 1.1 headers and
+  chunked content. Thanks Arsa again! 

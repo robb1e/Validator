@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>PHPCrawl - Webcrawler Class</title>
+ <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+
+		<div id="header">
+				<h1>PHPCrawl Documentation</h1>
+				For PHPCrawl Version 0.7
+		</div>
+
+		<div id="menu_container">
+		  <div id="menu">
+						<ul id="menu">
+						<li><a href="index.html">Introduction & Requirements</a></li>
+				  <li><a href="quickstart.html">Quickstart</a></li>
+		    <li><a href="example.html">Example-Script</a></li>
+				  <li><a href="version_info.html">Version-History</a></li>
+				  <li><a href="testinterface.html">The Testinterface</a></li>
+				  <li><a href="classreference.html">Classreference</a></li>
+						</ul>
+				</div>
+    
+		  <div id="download">
+						<ul id="menu">
+      <li><a href="download.html">Download PHPCrawl<br></a></li>
+      <li><a href="http://sourceforge.net/projects/phpcrawl">Sourceforge Projectpage<br></a></li>
+						</ul>
+				</div>
+    
+    <div id="sflogo">
+      <a href="http://sourceforge.net">
+      <!--
+      <img src="http://sflogo.sourceforge.net/sflogo.php?group_id=89439&amp;type=7" width="210" height="62" border="0" alt="SourceForge.net Logo"></a></div>
+      -->
+       <img src="img/sflogo.png" width="210" height="62" border="0" alt="SourceForge.net Logo"></a></div>
+       
+  </div>
+
+  <div id="main">
+  <h2>A Example-Script</h2>
+  
+  <p>
+		  The following code is an complete example for using the class.<br>
+				The listed script "crawls" a site and just prints out some information about found
+				pages.<br>
+    <br>
+				Please note that this example-script also comes in a file called "example.php" with the phpcrawl-package.
+  </p>
+  
+  <p id="code">
+    &lt;?php<br>
+				<br>
+				//&nbsp;It&nbsp;may&nbsp;take&nbsp;a&nbsp;whils&nbsp;to&nbsp;crawl&nbsp;a&nbsp;site&nbsp;...<br>
+				set_time_limit(10000);<br>
+				<br>
+				//&nbsp;Inculde&nbsp;the&nbsp;phpcrawl-mainclass<br>
+				include("classes/phpcrawler.class.php");<br>
+				<br>
+				//&nbsp;Extend&nbsp;the&nbsp;class&nbsp;and&nbsp;override&nbsp;the&nbsp;handlePageData()-method<br>
+				class&nbsp;MyCrawler&nbsp;extends&nbsp;PHPCrawler&nbsp;<br>
+    {<br>
+				&nbsp;&nbsp;function&nbsp;handlePageData(&$page_data)&nbsp;<br>
+    &nbsp;&nbsp;{<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Here&nbsp;comes&nbsp;your&nbsp;code.<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Do&nbsp;whatever&nbsp;you&nbsp;want&nbsp;with&nbsp;the&nbsp;information&nbsp;given&nbsp;in&nbsp;the<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;array&nbsp;$page_data&nbsp;about&nbsp;a&nbsp;page&nbsp;or&nbsp;file&nbsp;that&nbsp;the&nbsp;crawler&nbsp;actually&nbsp;found.<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;See&nbsp;a&nbsp;complete&nbsp;list&nbsp;of&nbsp;elements&nbsp;the&nbsp;array&nbsp;will&nbsp;contain&nbsp;in&nbsp;the&nbsp;<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;class-refenence.<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;This&nbsp;is&nbsp;just&nbsp;a&nbsp;simple&nbsp;example.<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Print&nbsp;the&nbsp;URL&nbsp;of&nbsp;the&nbsp;actual&nbsp;requested&nbsp;page&nbsp;or&nbsp;file<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;"Page&nbsp;requested:&nbsp;".$page_data["url"]."&lt;br&gt;";<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Print&nbsp;the&nbsp;first&nbsp;line&nbsp;of&nbsp;the&nbsp;header&nbsp;the&nbsp;server&nbsp;sent&nbsp;(HTTP-status)<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;"Status:&nbsp;".strtok($page_data["header"],&nbsp;"\n")."&lt;br&gt;";<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Print&nbsp;the&nbsp;referer<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;"Referer-page:&nbsp;".$page_data["referer_url"]."&lt;br&gt;";<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Print&nbsp;if&nbsp;the&nbsp;content&nbsp;was&nbsp;be&nbsp;recieved&nbsp;or&nbsp;not<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;($page_data["received"]==true)<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;"Content&nbsp;received:&nbsp;".$page_data["bytes_received"]."&nbsp;bytes";<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;else<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;"Content&nbsp;not&nbsp;received";<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;...<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Now&nbsp;you&nbsp;should&nbsp;do&nbsp;something&nbsp;with&nbsp;the&nbsp;content&nbsp;of&nbsp;the&nbsp;actual<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;received&nbsp;page&nbsp;or&nbsp;file&nbsp;($page_data[source]),&nbsp;we&nbsp;skip&nbsp;it&nbsp;in&nbsp;this&nbsp;example<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;"&lt;br&gt;&lt;br&gt;";<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;flush();<br>
+				&nbsp;&nbsp;}<br>
+				}<br>
+				<br>
+				//&nbsp;Now,&nbsp;create&nbsp;an&nbsp;instance&nbsp;of&nbsp;the&nbsp;class,&nbsp;set&nbsp;the&nbsp;behaviour<br>
+				//&nbsp;of&nbsp;the&nbsp;crawler&nbsp;(see&nbsp;class-reference&nbsp;for&nbsp;more&nbsp;methods)<br>
+				//&nbsp;and&nbsp;start&nbsp;the&nbsp;crawling-process.<br>
+				<br>
+				$crawler&nbsp;=&nbsp;&new&nbsp;MyCrawler();<br>
+				<br>
+				//&nbsp;URL&nbsp;to&nbsp;crawl<br>
+				$crawler-&gt;setURL("www.php.net");<br>
+				<br>
+				//&nbsp;Only&nbsp;receive&nbsp;content&nbsp;of&nbsp;files&nbsp;with&nbsp;content-type&nbsp;"text/html"<br>
+				//&nbsp;(regular&nbsp;expression,&nbsp;preg)<br>
+				$crawler-&gt;addReceiveContentType("/text\/html/");<br>
+				<br>
+				//&nbsp;Ignore&nbsp;links&nbsp;to&nbsp;pictures,&nbsp;dont&nbsp;even&nbsp;request&nbsp;pictures<br>
+				//&nbsp;(preg_match)<br>
+				$crawler-&gt;addNonFollowMatch("/.(jpg|gif|png)$/&nbsp;i");<br>
+				<br>
+				//&nbsp;Store&nbsp;and&nbsp;send&nbsp;cookie-data&nbsp;like&nbsp;a&nbsp;browser&nbsp;does<br>
+				$crawler-&gt;setCookieHandling(true);<br>
+				<br>
+				//&nbsp;Set&nbsp;the&nbsp;traffic-limit&nbsp;to&nbsp;1&nbsp;MB&nbsp;(in&nbsp;bytes,<br>
+				//&nbsp;for&nbsp;testing&nbsp;we&nbsp;dont&nbsp;want&nbsp;to&nbsp;"suck"&nbsp;the&nbsp;whole&nbsp;site)<br>
+				$crawler-&gt;setTrafficLimit(1000&nbsp;*&nbsp;1024);<br>
+				<br>
+				//&nbsp;Thats&nbsp;enough,&nbsp;now&nbsp;here&nbsp;we&nbsp;go<br>
+				$crawler-&gt;go();<br>
+				<br>
+				<br>
+				//&nbsp;At&nbsp;the&nbsp;end,&nbsp;after&nbsp;the&nbsp;process&nbsp;is&nbsp;finished,&nbsp;we&nbsp;print&nbsp;a&nbsp;short<br>
+				//&nbsp;report&nbsp;(see&nbsp;method&nbsp;getReport()&nbsp;for&nbsp;more&nbsp;information)<br>
+				<br>
+				$report&nbsp;=&nbsp;$crawler-&gt;getReport();<br>
+				<br>
+				echo&nbsp;"Summary:&lt;br&gt;";<br>
+				if&nbsp;($report["traffic_limit_reached"]==true)<br>
+				&nbsp;&nbsp;echo&nbsp;"Traffic-limit&nbsp;reached&nbsp;&lt;br&gt;";<br>
+				&nbsp;&nbsp;<br>
+				echo&nbsp;"Links&nbsp;followed:&nbsp;".$report["links_followed"]."&lt;br&gt;";<br>
+				echo&nbsp;"Files&nbsp;received:&nbsp;".$report["files_received"]."&lt;br&gt;";<br>
+				echo&nbsp;"Bytes&nbsp;received:&nbsp;".$report["bytes_received"]."&lt;br&gt;";<br>
+				<br>
+				?&gt;
+  </p>
+  
+  </div>
+  
+</body>
+</html>

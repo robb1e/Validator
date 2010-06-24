@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>PHPCrawl - Webcrawler Class</title>
+ <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+
+		<div id="header">
+				<h1>PHPCrawl Documentation</h1>
+				For PHPCrawl Version 0.7
+		</div>
+
+		<div id="menu_container">
+		  <div id="menu">
+						<ul id="menu">
+						<li><a href="index.html">Introduction & Requirements</a></li>
+				  <li><a href="quickstart.html">Quickstart</a></li>
+		    <li><a href="example.html">Example-Script</a></li>
+				  <li><a href="version_info.html">Version-History</a></li>
+				  <li><a href="testinterface.html">The Testinterface</a></li>
+				  <li><a href="classreference.html">Classreference</a></li>
+						</ul>
+				</div>
+    
+		  <div id="download">
+						<ul id="menu">
+      <li><a href="download.html">Download PHPCrawl<br></a></li>
+      <li><a href="http://sourceforge.net/projects/phpcrawl">Sourceforge Projectpage<br></a></li>
+						</ul>
+				</div>
+    
+    <div id="sflogo">
+      <a href="http://sourceforge.net">
+      <!--
+      <img src="http://sflogo.sourceforge.net/sflogo.php?group_id=89439&amp;type=7" width="210" height="62" border="0" alt="SourceForge.net Logo"></a></div>
+      -->
+       <img src="img/sflogo.png" width="210" height="62" border="0" alt="SourceForge.net Logo"></a></div>
+       
+  </div>
+
+  <div id="main">
+    <h2>Quickstart & Example</h2>
+    
+    <p>
+		    The following steps show the usage of phpcrawl.<br>
+						This is what you have to do to start a crawling-process:<br><br>
+
+
+						1. Include the phpcrawl-mainclass to your script or project. Its located in the "classes"-path of the package.<br>
+				</p>
+    
+				<p id="code">
+						include("classes/phpcrawler.class.php");<br>
+		  </p>
+      
+    <p>
+      2. Extend the phpcrawler-class and override the handlePageData-Method with your own code to handle
+      the information of every page or file the crawler will find.<br>
+    </p>
+    
+    <p id="code">
+						class MyCrawler extends PHPCrawler<br>
+      {<br>
+						&nbsp;&nbsp;function handlePageData(&$page_data)<br>
+      &nbsp;&nbsp;{<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;// your code, do something with the array $page_data<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;// that contains the page/file-information<br>
+						&nbsp;&nbsp;}<br>
+						}
+    </p>
+      
+				<p>
+      3. Create an instance of that class, define the behaviour of the crawler with the
+      given methods and start crawling.<br>
+    </p>
+    
+    <p id="code">
+      $crawler = &new MyCrawler();<br>
+						$crawler->setURL("www.foo.com");<br>
+						$crawler->addReceiveContentType("/text\/html/");<br>
+      // ...<br>
+					 <br>
+					 $crawler->go();
+    </p>
+  
+  </div>
+  
+</body>
+</html>
