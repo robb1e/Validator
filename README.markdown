@@ -6,6 +6,13 @@
 	* PHPUnit
 	* Frontend Test Suite (git://github.com/NeilCrosby/frontend-test-suite.git)
 	* Apache ANT
+
+## Setup
+
+        * git clone git://github.com/robb1e/Validator.git
+        * cd Validator
+        * git submodule init
+        * git submodule update
 	
 ## How to run
 
