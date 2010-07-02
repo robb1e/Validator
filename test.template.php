@@ -69,6 +69,14 @@ class ExampleTestSuite extends TheCodeTrainEasyFrontendTestSuite {
 		print_r(array_unique($crawler->error_pages));
 		echo "\nnot found\n\n";
 		print_r(array_unique($crawler->notfound_pages));
+
+		if (sizeof($crawler->pages) == 0)
+			exit(1);
+		if (sizeof($crawler->error_pages) > 0)
+			exit(1);
+		if (sizeof($crawler->notfound_pages) > 0)
+			exit(1);
+
       return parent::suite( array(
         'html'  =>  array(
           'validator' => 'http://validator.w3.org/check',
